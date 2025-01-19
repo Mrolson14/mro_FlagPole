@@ -28,44 +28,19 @@ This **Flagpole Script** lets players interact with flagpoles and flags in your 
 
 ### Add the Following Items:
 ```lua
--- Flagpole item
-["flagpole"] = {
-    name = "flagpole",
-    label = "Flagpole",
-    weight = 1000,
-    type = "item",
-    image = "flagpole.png", -- Ensure the image exists in your inventory images folder
-    unique = false,
-    useable = false,
-    shouldClose = true,
-    description = "A pole to hold your flags high!"
-},
+ ['flagpole'] = {    ["name"]     = "flagpole",  ["label"] = "Flagpole",           ["weight"] = 500, ["type"] = "item", ["image"] = "flagpole.png", ["unique"] = false,  ["useable"] = true,["shouldClose"] = false, ["combinable"] = nil,["description"] = "A sturdy pole for your flag." },
+    
 
--- US Flag item
-["flag_us"] = {
-    name = "flag_us",
-    label = "US Flag",
-    weight = 500,
-    type = "item",
-    image = "flag_us.png", -- Ensure the image exists in your inventory images folder
-    unique = false,
-    useable = false,
-    shouldClose = true,
-    description = "Wave the stars and stripes proudly!"
-},
+    ["flag_us"] = {     ["name"]     = "flag_us",   ["label"]= "flag US",             ["weight"] = 500, ["type"] = "item", ["image"] = "flag_us.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_uk"] = {     ["name"]     = "flag_uk",   ["label"]= "flag Uk",             ["weight"] = 500, ["type"] = "item", ["image"] = "flag_uk.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_jp"] = {     ["name"]     = "flag_jp",   ["label"]= "flag japan",          ["weight"] = 500, ["type"] = "item", ["image"] = "flag_jp.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_fr"] = {     ["name"]     = "flag_fr",   ["label"]= "flag france",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_fr.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_ca"] = {     ["name"]     = "flag_ca",   ["label"]= "flag canada",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_ca.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_sl"] = {     ["name"]     = "flag_sl",   ["label"]= "flag scotland",       ["weight"] = 500, ["type"] = "item", ["image"] = "flag_sl.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_rs"] = {     ["name"]     = "flag_rs",   ["label"]= "flag russia",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_rs.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_gm"] = {     ["name"]     = "flag_gm",   ["label"]= "flag german",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_gm.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+    ["flag_gl"] = {     ["name"]     = "flag_gl",   ["label"]= "flag ireland",        ["weight"] = 500, ["type"] = "item", ["image"] = "flag_gl.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
 
--- UK Flag item
-["flag_uk"] = {
-    name = "flag_uk",
-    label = "UK Flag",
-    weight = 500,
-    type = "item",
-    image = "flag_uk.png", -- Ensure the image exists in your inventory images folder
-    unique = false,
-    useable = false,
-    shouldClose = true,
-    description = "Raise the Union Jack!"
-}
 ```
 
 5. 🎨 Add appropriate item icons to your inventory image directory.  
