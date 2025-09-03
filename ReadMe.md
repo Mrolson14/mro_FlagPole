@@ -1,7 +1,12 @@
-# 🎌 Flagpole Script for QBCore Framework
+# 🎌 Flagpole Script for Q## 🚀 Installation
+1. 📂 Place the resource folder in your server's `resources` directory.  
+2. 📝 Add `ensure <resource_name>` to your `server.cfg`.  
+3. 🗄️ **Database Setup** (Optional): If using database storage (UseDatabase = true), import the `flagpole.sql` file into your database to create the required table, or the script will auto-create it on first start.
+4. 🔧 Configure the script by updating the `Config` table to match your server setup.  
+5. 🛠️ **Add Items**: Insert the required items into `qb-core/shared/items.lua`. Framework
 
 ## 📖 Introduction
-This **Flagpole Script** lets players interact with flagpoles and flags in your QBCore-based FiveM server. Players can place, customize, and manage flagpoles with dynamic controls and persistent data. 🏴
+This **Flagpole Script** lets players interact with flagpoles and flags in your QBCore-based FiveM server. Players can place, customize, and manage flagpoles with dynamic controls and persistent data stored in a MySQL database. 🏴
 
 ---
 
@@ -10,13 +15,17 @@ This **Flagpole Script** lets players interact with flagpoles and flags in your 
 🎏 **Attach Flags**: Choose from a variety of flags in your inventory.  
 ⬆️ **Raise and Lower Flags**: Use keys to dynamically adjust flag height.  
 🗺️ **Blip Customization**: Rename and adjust the map blip for your flagpole.  
-💾 **Data Persistence**: Automatically saves flagpole and flag data to the database.
+💾 **Database Persistence**: Automatically saves flagpole and flag data to MySQL database or JSON file (configurable).
 
 ---
 
 ## 🛠️ Requirements
 - **Framework**: QBCore Framework.  
 - **Targeting System**: Compatible with `qb-target`
+- **Database** (Optional): MySQL with oxmysql (only if UseDatabase = true)
+- **Dependencies**: 
+  - `@oxmysql/lib/MySQL.lua` (only if using database)
+  - `@ox_lib/init.lua`
 
 ---
 
@@ -28,19 +37,44 @@ This **Flagpole Script** lets players interact with flagpoles and flags in your 
 
 ### Add the Following Items:
 ```lua
- ['flagpole'] = {    ["name"]     = "flagpole",  ["label"] = "Flagpole",           ["weight"] = 500, ["type"] = "item", ["image"] = "flagpole.png", ["unique"] = false,  ["useable"] = true,["shouldClose"] = false, ["combinable"] = nil,["description"] = "A sturdy pole for your flag." },
-    
+-- Flagpole item
+["flagpole"] = {
+    name = "flagpole",
+    label = "Flagpole",
+    weight = 1000,
+    type = "item",
+    image = "flagpole.png", -- Ensure the image exists in your inventory images folder
+    unique = false,
+    useable = false,
+    shouldClose = true,
+    description = "A pole to hold your flags high!"
+},
 
-    ["flag_us"] = {     ["name"]     = "flag_us",   ["label"]= "flag US",             ["weight"] = 500, ["type"] = "item", ["image"] = "flag_us.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_uk"] = {     ["name"]     = "flag_uk",   ["label"]= "flag Uk",             ["weight"] = 500, ["type"] = "item", ["image"] = "flag_uk.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_jp"] = {     ["name"]     = "flag_jp",   ["label"]= "flag japan",          ["weight"] = 500, ["type"] = "item", ["image"] = "flag_jp.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_fr"] = {     ["name"]     = "flag_fr",   ["label"]= "flag france",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_fr.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_ca"] = {     ["name"]     = "flag_ca",   ["label"]= "flag canada",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_ca.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_sl"] = {     ["name"]     = "flag_sl",   ["label"]= "flag scotland",       ["weight"] = 500, ["type"] = "item", ["image"] = "flag_sl.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_rs"] = {     ["name"]     = "flag_rs",   ["label"]= "flag russia",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_rs.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_gm"] = {     ["name"]     = "flag_gm",   ["label"]= "flag german",         ["weight"] = 500, ["type"] = "item", ["image"] = "flag_gm.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
-    ["flag_gl"] = {     ["name"]     = "flag_gl",   ["label"]= "flag ireland",        ["weight"] = 500, ["type"] = "item", ["image"] = "flag_gl.png",  ["unique"] = true,   ["useable"] = true,["shouldClose"] = true,  ["combinable"] = nil,["description"] = "A flag to attach to a flagpole."},
+-- US Flag item
+["flag_us"] = {
+    name = "flag_us",
+    label = "US Flag",
+    weight = 500,
+    type = "item",
+    image = "flag_us.png", -- Ensure the image exists in your inventory images folder
+    unique = false,
+    useable = false,
+    shouldClose = true,
+    description = "Wave the stars and stripes proudly!"
+},
 
+-- UK Flag item
+["flag_uk"] = {
+    name = "flag_uk",
+    label = "UK Flag",
+    weight = 500,
+    type = "item",
+    image = "flag_uk.png", -- Ensure the image exists in your inventory images folder
+    unique = false,
+    useable = false,
+    shouldClose = true,
+    description = "Raise the Union Jack!"
+}
 ```
 
 5. 🎨 Add appropriate item icons to your inventory image directory.  
@@ -54,6 +88,7 @@ Customize the script in the `Config` section:
 ```lua
 Config = {
     Debug = true, -- 🐛 Enable or disable debug mode.
+    UseDatabase = true, -- 💾 Set to true to use MySQL database, false to use JSON file storage
     Target = 'qb-target', -- 🎯 Targeting system.
     FlagpoleModel = "prop_flagpole_1a", -- 🎋 Prop name for the flagpole.
     FlagpoleItem = "flagpole", -- 🎒 Item needed to place a flagpole.
@@ -83,6 +118,26 @@ Config = {
     }
 }
 ```
+---
+
+## 💾 Storage Options
+
+The script supports two storage methods that can be configured via the `UseDatabase` setting:
+
+### 🗄️ **Database Storage (UseDatabase = true)**
+- **Pros**: Better performance, scalability, data integrity, multi-server support
+- **Cons**: Requires MySQL database setup
+- **Requirements**: MySQL database with oxmysql resource
+- **Auto-saves**: Data is saved immediately to database
+
+### 📄 **JSON File Storage (UseDatabase = false)**  
+- **Pros**: Simple setup, no database required, easy to backup
+- **Cons**: Less performant for large amounts of data, single-server only
+- **Requirements**: None (uses local file system)
+- **Auto-saves**: Data is saved every 5 minutes automatically
+
+**Recommendation**: Use database storage for production servers, JSON for development/testing.
+
 ---
 
 ## 🎮 Controls

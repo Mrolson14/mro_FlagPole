@@ -1,9 +1,9 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author '⸸♱♥ 𝓜𝓻.𝓢𝓜𝓤𝓡𝓕 ♥♱⸸ & Mr.Olson14'
-description 'slrp_FlagPole'
-version '1.0.0'
+author 'Mr.Olson14'
+description 'flagPole'
+version '2.0.0'
 lua54 'yes'
 
 shared_scripts {

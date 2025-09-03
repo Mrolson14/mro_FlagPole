@@ -1,8 +1,21 @@
 Config = {
     Debug = true, -- 🐛 Enable or disable debug mode.
+    UseDatabase = true, -- 💾 Set to true to use MySQL database, false to use JSON file storage
+    JsonFilePath = "flagpole_data.json", -- 📄 JSON file name for storage (when UseDatabase = false)
     Target = 'qb-target', -- 🎯 Targeting system.
     FlagpoleModel = "prop_flagpole_1a", -- 🎋 Prop name for the flagpole.
     FlagpoleItem = "flagpole", -- 🎒 Item needed to place a flagpole.
+    
+    -- Performance Settings
+    Performance = {
+        DistanceCheckInterval = 250, -- 🔄 How often to check distance (ms) - Reduced from 50ms for better performance
+        ControlCheckInterval = 50,   -- ⚡ How often to check controls when in range (ms)
+        OutOfRangeInterval = 500,    -- 💤 How often to check when out of range (ms)
+        EntityCacheUpdate = 100,     -- 🗃️ How often to update entity cache (ms)
+        AutoCleanupInterval = 300000, -- 🧹 Auto cleanup props every 5 minutes (ms)
+        AutoSaveInterval = 300000,   -- 💾 Auto-save interval for JSON mode (ms)
+    },
+    
     Flags = {
         US = {
             prop = "prop_flag_us", -- 🇺🇸 US flag prop.
